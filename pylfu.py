@@ -15,6 +15,15 @@ class LFUCache(object):
         value = cache_node.value
         self.move_forward(cache_node, freq_node)
         return value
+        
+    def dump_cache(self):
+        head_freq_node = self.freq_link_head
+        self.cache.pop(head_freq_node.cache_head.key)
+        head_freq_node.pop_head_cache()
+
+        if head_freq_node.count_caches() == 0:
+            self.freq_link_head = head_freq_node.nxt
+            head_freq_node.remove()
 
     def __setitem__(self, key, value):
         if self.capacity <= 0:
