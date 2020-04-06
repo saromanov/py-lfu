@@ -7,7 +7,7 @@ class LFUCache(object):
         self.capacity = capacity
         self.freq_link_head = None
     
-    def get(self, key):
+    def __getitem__(self, key):
         if key not in self.cache:
             return -1
         cache_node = self.cache[key]
@@ -16,7 +16,7 @@ class LFUCache(object):
         self.move_forward(cache_node, freq_node)
         return value
 
-    def set(self, key, value):
+    def __setitem__(self, key, value):
         if self.capacity <= 0:
             return -1
         
